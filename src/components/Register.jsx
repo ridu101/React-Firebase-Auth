@@ -1,73 +1,100 @@
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-
 import { Link } from "react-router";
-// import { auth } from "../firbase.init";
 import { use } from "react";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Register = () => {
   // get the user value
   const { createUser } = use(AuthContext);
-  // console.log('in the register',authInfo)
 
-  const handleRegister = (event) =>{
-    event.preventDefault()
+  // handle register functionality
+  const handleRegister = (event) => {
+    event.preventDefault();
+
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    createUser(email,password)
-      .then(result =>{
-        console.log(result.user)
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+
+        event.target.reset();
+
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+          text: "Your account has been created successfully.",
+          confirmButtonText: "Great!",
+          confirmButtonColor: "#2563eb",
+        });
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch((error) => {
+        console.log(error);
 
-  }
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: error.message,
+          confirmButtonText: "Try Again",
+          confirmButtonColor: "#dc2626",
+        });
+      });
+  };
 
-
-  // const handleRegister = (event) => {
-  //   event.preventDefault();
-  //   const email = event.target.email.value;
-  //   const password = event.target.password.value;
-  //   console.log(email, password);
-  //   createUserWithEmailAndPassword(auth, email, password)
-  //     .then((result) => {
-  //       console.log(result.user);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
   return (
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto mt-10 mb-10">
-      <div className="card-body">
-        <h1 className="text-4xl font-bold">Register now!</h1>
-        <form onSubmit={handleRegister}>
-          <fieldset className="fieldset">
-            <label className="label">Email</label>
-            <input
-              type="email"
-              className="input"
-              placeholder="Email"
-              name="email"
-            />
-            <label className="label">Password</label>
-            <input
-              type="password"
-              className="input"
-              placeholder="Password"
-              name="password"
-            />
-            <button className="btn btn-neutral mt-4">Register</button>
-          </fieldset>
-        </form>
-        <p>
-          Already Have an Account ? Please{" "}
-          <Link to="/login" className="text-blue-500 hover:link">
-            Sign In
-          </Link>
-        </p>
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-10 bg-gradient-to-br from-green-50 via-white to-blue-50">
+      <div className="card w-full max-w-md bg-base-100 shadow-2xl border border-base-200">
+        <div className="card-body p-8">
+          <div className="text-center mb-4">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-success/10">
+              <span className="text-3xl">🚀</span>
+            </div>
+
+            <h1 className="text-4xl font-bold">Create Account</h1>
+
+            <p className="mt-2 text-base-content/60">
+              Join us and get started today
+            </p>
+          </div>
+
+          <form onSubmit={handleRegister}>
+            <fieldset className="fieldset">
+              <label className="label font-semibold">Email</label>
+
+              <input
+                type="email"
+                className="input input-bordered w-full"
+                placeholder="Enter your email"
+                name="email"
+                required
+              />
+
+              <label className="label font-semibold mt-2">Password</label>
+
+              <input
+                type="password"
+                className="input input-bordered w-full"
+                placeholder="Create a password"
+                name="password"
+                required
+              />
+
+              <button className="btn btn-primary mt-5 w-full">
+                Create Account
+              </button>
+            </fieldset>
+          </form>
+
+          <p className="text-center mt-5 text-base-content/70">
+            Already Have an Account?{" "}
+            <Link
+              to="/login"
+              className="text-primary font-semibold hover:underline"
+            >
+              Sign In
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
