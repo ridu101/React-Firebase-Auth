@@ -1,6 +1,9 @@
-import React from 'react';
+import { use } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const Home = () => {
+  const authInfo = use ( AuthContext);
+  console.log(authInfo)
     return (
       <div className="hero bg-base-200 mt-10 mb-10">
         <div className="hero-content flex-col lg:flex-row-reverse">
