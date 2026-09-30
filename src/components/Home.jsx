@@ -1,6 +1,7 @@
 import { use } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import logo from "../assets/logo-vertical.png";
 
 const Home = () => {
   const authInfo = use(AuthContext);
@@ -8,7 +9,7 @@ const Home = () => {
   console.log(authInfo);
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="min-h-[calc(100vh-80px)] bg-linear-to-br from-blue-50 via-white to-green-50">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -64,7 +65,7 @@ const Home = () => {
               <figure className="px-6 pt-6">
                 <img
                   alt="React Firebase authentication"
-                  src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+                  src={logo}
                   className="rounded-2xl w-full"
                 />
               </figure>
